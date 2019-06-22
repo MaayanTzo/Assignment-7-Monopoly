@@ -9,8 +9,7 @@ body{
     font-size:0px;
     margin:auto;
     margin-top:10px;
-    margin-bottom:10px;
-    
+    margin-bottom:10px;   
 }
 
 .board .cell{
@@ -59,9 +58,6 @@ body{
     background-image: url(../images/jail.jpg);
 }
 
-.jailed {
-    background-image: url('https://i.pinimg.com/originals/a8/15/d6/a815d6f2edebb1eae33c8f6a7411c188.png')
-}
 .board .game.cell.free-parking{
     background-image: url(../images/parking.png);
 }
@@ -224,3 +220,15 @@ body{
 .dice-dot.right{
     margin-left:36%;
 }
+.jailed {
+    background-color: white;
+    background-image: url('https://i.pinimg.com/originals/a8/15/d6/a815d6f2edebb1eae33c8f6a7411c188.png');
+    background-size:contain;
+    background-position:center;
+}
+ .happy {
+     background-color: white;
+     background-image: url('https://png.pngtree.com/png-vector/20190115/ourmid/pngtree-hand-painted-mbe-style-mbe-smiley-face-service-star-png-image_338250.jpg');
+     background-size:contain;
+     background-position:center;
+ }
