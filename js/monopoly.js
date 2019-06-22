@@ -6,7 +6,7 @@ Monopoly.allowRoll = true;
 
 //player's initial money:
 
-Monopoly.moneyAtStart = 50;
+Monopoly.moneyAtStart = 200;
 
 Monopoly.doubleCounter = 0;
 
@@ -224,11 +224,23 @@ Monopoly.handleChanceCard = function(player){
 };
 
 Monopoly.handleCommunityCard = function(player){
-    //TODO: implement this method
-    alert("not implemented yet!")
-    // /get_random_community_card
-
-    Monopoly.setNextPlayerTurn();
+    var popup = Monopoly.getPopup("community");
+    popup.find(".popup-content").addClass("loading-state");
+    $.get("https://itcmonopoly.appspot.com/get_random_community_card", function(communityJson){
+        popup.find(".popup-content #text-placeholder").text(communityJson["content"]);
+        popup.find(".popup-title").text(communityJson["title"]);
+        popup.find(".popup-content").removeClass("loading-state");
+        popup.find(".popup-content button").attr("data-action",communityJson["action"]).attr("data-amount",communityJson["amount"]);
+    },"json");
+    popup.find("button").unbind("click").bind("click",function(){
+        var currentBtn = $(this);
+        var action = currentBtn.attr("data-action");
+        var amount = currentBtn.attr("data-amount");
+        Monopoly.handleAction(player,action,amount);
+    });
+    Monopoly.showPopup("community");
+    //alert("not implemented yet!")
+    //Monopoly.setNextPlayerTurn();
 };
 
 //send player to jail:
