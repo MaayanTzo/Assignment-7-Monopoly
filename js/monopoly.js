@@ -6,7 +6,7 @@ Monopoly.allowRoll = true;
 
 //player's initial money:
 
-Monopoly.moneyAtStart = 200;
+Monopoly.moneyAtStart = 500;
 
 Monopoly.doubleCounter = 0;
 
@@ -61,7 +61,6 @@ Monopoly.updatePlayersMoney = function (player, amount) {
     playersMoney += amount;
     if (playersMoney < 0) {
         //Monopoly.removePlayer(player,propertyCell);
-        alert("you are broke!")
     }
     player.attr("data-money", playersMoney);
     player.attr("title", player.attr("id") + ": $" + playersMoney);
@@ -122,9 +121,9 @@ Monopoly.handleTurn = function () {
         Monopoly.handlePayRent(player, playerCell);
     } else if (playerCell.is(".property:not(.available)")) {
         player.addClass("happy")
-        setTimeout(function(){
+        setTimeout(function () {
             player.removeClass("happy")
-        },2000);
+        }, 2000);
         //Monopoly.handlePayRent(player, playerCell);
     } else if (playerCell.is(".go-to-jail")) {
         Monopoly.handleGoToJail(player);
