@@ -6,7 +6,7 @@ Monopoly.allowRoll = true;
 
 //player's initial money:
 
-Monopoly.moneyAtStart = 500;
+Monopoly.moneyAtStart = 50;
 
 Monopoly.doubleCounter = 0;
 
@@ -54,18 +54,31 @@ Monopoly.getPlayersMoney = function(player){
     return parseInt(player.attr("data-money"));
 };
 
-//update the player's balance:
+//update the player's balance, remove player if broke:
 
 Monopoly.updatePlayersMoney = function(player,amount){
     var playersMoney = parseInt(player.attr("data-money"));
-    playersMoney -= amount;
+    playersMoney += amount;
     if (playersMoney < 0 ){
+        //Monopoly.removePlayer(player,propertyCell);
         alert("you are broke!")
     }
     player.attr("data-money",playersMoney);
     player.attr("title",player.attr("id") + ": $" + playersMoney);
     Monopoly.playSound("chaching");
 };
+
+//if player is broke remove him from the game
+
+Monopoly.removePlayer = function(player,propertyCell){
+    var thisPlayer = '$("#"'+player.attr("id")+'")';
+    propertyCell.removeClass(player.attr("id"));
+    propertyCell.removeClass("available");
+    propertyCell.attr("data-owner","");
+    thisPlayer.remove();
+    Monopoly.showPopup("bye");
+    Monopoly.closeAndNextTurn();
+}
 
 // roll the dice and get a random number, get the current player and move forward/backward according to dice:
 Monopoly.rollDice = function(){
